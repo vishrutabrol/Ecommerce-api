@@ -1,0 +1,77 @@
+# Node modules and build output
+/node_modules
+/dist
+/build
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# VSCode exceptions (optional: keep workspace settings)
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# TypeORM migration and seed    artifacts (if generated)
+/src/database/migrations/*.js
+/src/database/seeds/*.js
+/src/database/migrations/*.js.map
+/src/database/seeds/*.js.map
+
+# Temporary files
+.temp
+.tmp
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# NestJS build cache
+.cache
+
+# Optional: ignore compiled entity files if using ts-node
+/src/entities/*.js
+/src/entities/*.js.map
+
+# Optional: ignore compiled DTOs and modules
+/src/modules/**/**/*.js
+/src/modules/**/**/*.js.map
+
+/public
+/package-lock.json
