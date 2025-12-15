@@ -4,6 +4,7 @@ import { CartItem } from 'src/entities/cart-item.entity';
 import { Cart } from 'src/entities/cart.entity';
 import { Product } from 'src/entities/product.entity';
 import { User } from 'src/entities/user.entity';
+import { Category } from 'src/entities/category.entity';
 dotenv.config({
   path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
 });
@@ -24,7 +25,7 @@ export const AppDataSource = new DataSource({
   username: requireEnv('DB_USERNAME'),
   password: requireEnv('DB_PASSWORD'),
   database: requireEnv('DB_NAME'),
-  entities: [User, Cart, CartItem, Product],
+  entities: [User, Cart, CartItem, Product, Category],
   migrations: ['src/database/migrations/*.ts'],
   synchronize: false,
 });

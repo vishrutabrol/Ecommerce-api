@@ -29,20 +29,20 @@ export class CartService {
 
     let cartItem = await this.cartItemRepo.findOne({
       where: { cart: { id: cart.id }, productId: dto.productId },
-      relations: ['cart'], // ✅ load relation
+      relations: ['cart'],
     });
 
     if (cartItem) {
       cartItem.quantity += dto.quantity;
       cartItem.applicableAmount = Number(product.price) * cartItem.quantity;
-      cartItem.cart = cart; // ✅ ensure relation is set
+      cartItem.cart = cart;
     } else {
       cartItem = this.cartItemRepo.create({
         userId: dto.userId,
         productId: dto.productId,
         quantity: dto.quantity,
         applicableAmount: Number(product.price) * dto.quantity,
-        cart: cart, // ✅ ensure relation is set
+        cart: cart,
       });
     }
 

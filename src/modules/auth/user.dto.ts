@@ -14,6 +14,9 @@ export class CreateUserDto {
 
   @IsString()
   phoneNo: string;
+
+  // @IsString()
+  // role?: string;
 }
 
 export class LoginUserDto {

@@ -31,10 +31,10 @@ export class CartItem {
   product: Product;
 
   @Column({ nullable: false })
-  cartId: number;
+  cart_id: number;
 
   @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'cartId' })
+  @JoinColumn({ name: 'cart_id' })
   cart: Cart;
 
   @Column({ type: 'int', default: 1 })

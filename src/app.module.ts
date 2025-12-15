@@ -12,6 +12,8 @@ import { Product } from './entities/product.entity';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { CartModule } from './modules/cart/cart.module';
+import { Category } from './entities/category.entity';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { CartModule } from './modules/cart/cart.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [User, Cart, CartItem, Product],
+        entities: [User, Cart, CartItem, Product, Category],
         // autoLoadEntities: true,
         // synchronize: configService.get('DB_SYNC') === 'true',
         synchronize: false,
@@ -50,6 +52,7 @@ import { CartModule } from './modules/cart/cart.module';
     AuthModule,
     ProductModule,
     CartModule,
+    CategoryModule,
   ],
   providers: [
     {
