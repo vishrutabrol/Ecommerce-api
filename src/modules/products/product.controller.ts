@@ -19,11 +19,13 @@ export class ProductController {
     @Query('page') page?: string,
     @Query('limit') limit?: string,
     @Query('type') type?: string,
+    @Query('search') search?: string,
+    @Query('category') category?: number,
   ): Promise<PaginatedProducts> {
     const pageNum = Number(page) || 1;
     const limitNum = Number(limit) || 10;
 
-    return this.productService.getAllProducts(pageNum, limitNum, type);
+    return this.productService.getAllProducts(pageNum, limitNum, type, search, category);
   }
 
   @Get(':id')

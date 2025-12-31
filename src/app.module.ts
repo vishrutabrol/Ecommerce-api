@@ -45,7 +45,7 @@ import { CategoryModule } from './modules/category/category.module';
       throttlers: [
         {
           ttl: 6000, // time window in milliseconds
-          limit: 10, // max requests per window per client
+          limit: 100, // max requests per window per client
         },
       ],
     }),
