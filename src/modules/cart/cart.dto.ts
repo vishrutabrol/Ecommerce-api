@@ -1,30 +1,11 @@
-import { IsInt, IsPositive } from 'class-validator';
+import { IsInt, IsPositive, Min, IsOptional } from 'class-validator';
 
-export class AddToCartDto {
+export class CartItemDto {
   @IsInt()
-  userId: number;
-
-  @IsInt()
+  @IsPositive()
   productId: number;
 
   @IsInt()
-  @IsPositive()
+  @Min(1)
   quantity: number;
-}
-
-export class UpdateCartItemDto {
-  @IsInt()
-  cartItemId: number;
-
-  @IsInt()
-  @IsPositive()
-  quantity: number;
-}
-
-export interface CartItemResponse {
-  id: number;
-  productId: number;
-  quantity: number;
-  applicableAmount: number;
-  cartId: number;
 }

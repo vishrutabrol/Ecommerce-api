@@ -34,7 +34,7 @@ export class ProductService {
     if (search) {
       where.name = ILike(`%${search}%`);
     }
-    if(category){
+    if (category) {
       where.categoryid = category;
     }
 
@@ -52,7 +52,10 @@ export class ProductService {
   }
 
   async getProductById(id: number): Promise<Product> {
-    const product = await this.productRepo.findOne({ where: { id } });
+    const product = await this.productRepo.findOne({
+      where: { id },
+      relations: ['category', 'owner'],
+    });
     if (!product) {
       throw new Error(`Product with ID ${id} not found`);
     }

@@ -2,50 +2,47 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
-  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  Index,
 } from 'typeorm';
 import { Cart } from './cart.entity';
 import { Product } from './product.entity';
-import { User } from './user.entity';
 
+@Entity('cart_items')
+@Index(['cartId', 'productId'], { unique: true })
+// cart-item.entity.ts - FIXED
 @Entity('cart_items')
 export class CartItem {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
-  userId: number;
+  @Column({ name: 'cart_id' }) // ✅ Maps camelCase to snake_case DB column
+  cartId: number;
 
-  @ManyToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'userId' })
-  user: User;
-
-  @Column({ nullable: false })
+  @Column({ name: 'product_id' })
   productId: number;
 
-  @ManyToOne(() => Product, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'productId' })
-  product: Product;
-
-  @Column({ nullable: false })
-  cart_id: number;
-
-  @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'cart_id' })
-  cart: Cart;
-
-  @Column({ type: 'int', default: 1 })
+  @Column({ default: 1 })
   quantity: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
-  applicableAmount: number;
+  @Column({ name: 'price_at_add' })
+  priceAtAdd: number;
 
-  @CreateDateColumn()
+  @Column({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @Column({ name: 'updated_at' })
   updatedAt: Date;
+
+  // Relations (unchanged)
+  @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'cart_id' }) // ✅ Explicit join column
+  cart: Cart;
+
+  @ManyToOne(() => Product)
+  @JoinColumn({ name: 'product_id' })
+  product: Product;
 }

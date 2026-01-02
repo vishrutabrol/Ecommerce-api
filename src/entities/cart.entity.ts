@@ -4,34 +4,39 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
   OneToMany,
+  ManyToOne,
   JoinColumn,
 } from 'typeorm';
 import { User } from './user.entity';
 import { CartItem } from './cart-item.entity';
 
+// cart.entity.ts - FIXED
 @Entity('carts')
 export class Cart {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column({ name: 'user_id' })
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.carts, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'userId' })
-  user: User;
+  @Column({ name: 'total_quantity' })
+  totalQuantity: number;
 
-  @OneToMany(() => CartItem, (item) => item.cart, { cascade: true })
-  items: CartItem[];
-
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  @Column({ name: 'total_amount' })
   totalAmount: number;
 
-  @CreateDateColumn()
+  @Column({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @Column({ name: 'updated_at' })
   updatedAt: Date;
+
+  // Relations
+  @ManyToOne(() => User, (user) => user.carts)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
+  @OneToMany(() => CartItem, (item) => item.cart)
+  items: CartItem[];
 }

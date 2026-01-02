@@ -25,10 +25,11 @@ export class CategoryController {
     @Query('page') page?: string,
     @Query('limit') limit?: string,
     @Query('type') type?: string,
+    @Query('search') search?: string,
   ): Promise<PaginatedCategory> {
     const pageNum = Number(page) || 1;
     const limitNum = Number(limit) || 10;
 
-    return this.categoryService.getAllCategory(pageNum, limitNum, type);
+    return this.categoryService.getAllCategory(pageNum, limitNum, type, search);
   }
 }

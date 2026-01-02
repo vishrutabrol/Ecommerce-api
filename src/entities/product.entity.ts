@@ -8,6 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from './user.entity';
+import { Category } from './category.entity';
 
 @Entity('products')
 export class Product {
@@ -44,4 +45,6 @@ export class Product {
 
   @UpdateDateColumn()
   updatedat: Date;
+
+  @ManyToOne(() => Category) @JoinColumn({ name: 'categoryid' }) category: Category;
 }

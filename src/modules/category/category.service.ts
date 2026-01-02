@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Category } from 'src/entities/category.entity';
 import {
   AddCategoryDto,
@@ -39,6 +39,7 @@ export class CategoryService {
     page: number = 1,
     limit: number = 10,
     type?: string,
+    search?: string,
   ): Promise<PaginatedCategory> {
     const skip = (page - 1) * limit;
 
@@ -46,6 +47,10 @@ export class CategoryService {
 
     if (type) {
       where.type = type.toLowerCase();
+    }
+
+    if (search) {
+      where.name = ILike(`%${search}%`);
     }
 
     const [data, total] = await this.categoryRepo.findAndCount({
