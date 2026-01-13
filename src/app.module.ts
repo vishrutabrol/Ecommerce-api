@@ -14,6 +14,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { CartModule } from './modules/cart/cart.module';
 import { Category } from './entities/category.entity';
 import { CategoryModule } from './modules/category/category.module';
+import { Payment } from './entities/payment.entity';
+import { PaymentModule } from './modules/payments/payment.module';
 
 @Module({
   imports: [
@@ -34,7 +36,7 @@ import { CategoryModule } from './modules/category/category.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [User, Cart, CartItem, Product, Category],
+        entities: [User, Cart, CartItem, Product, Category, Payment],
         // autoLoadEntities: true,
         // synchronize: configService.get('DB_SYNC') === 'true',
         synchronize: false,
@@ -53,6 +55,7 @@ import { CategoryModule } from './modules/category/category.module';
     ProductModule,
     CartModule,
     CategoryModule,
+    PaymentModule
   ],
   providers: [
     {

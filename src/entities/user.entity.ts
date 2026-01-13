@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Cart } from './cart.entity';
+import { Payment } from './payment.entity';
 export type UserRole = 'user' | 'admin';
 
 @Entity('users')
@@ -41,4 +42,7 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Payment, (payment) => payment.user)
+  payments: Payment[];
 }

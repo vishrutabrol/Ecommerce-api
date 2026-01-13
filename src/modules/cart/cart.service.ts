@@ -18,16 +18,13 @@ export class CartService {
     private productRepository: Repository<Product>,
   ) {}
 
-async getCartForUser(userId: number): Promise<Cart> {
-  // ✅ Debug first
-  console.log('🔍 getCartForUser called with userId:', userId);
-  
+async getCartForUser(userId: number): Promise<Cart> {  
   if (!userId || userId <= 0) {
     throw new BadRequestException('Invalid user ID');
   }
 
   let cart = await this.cartRepository.findOne({
-    where: { userId }, // ✅ DB column name
+    where: { userId },
     relations: ['items.product'],
   });
 

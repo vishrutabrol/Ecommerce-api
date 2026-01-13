@@ -19,7 +19,7 @@ export class CartItem {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'cart_id' }) // ✅ Maps camelCase to snake_case DB column
+  @Column({ name: 'cart_id' }) // Maps camelCase to snake_case DB column
   cartId: number;
 
   @Column({ name: 'product_id' })
@@ -28,7 +28,7 @@ export class CartItem {
   @Column({ default: 1 })
   quantity: number;
 
-  @Column({ name: 'price_at_add' })
+  @Column({ name: 'price_at_add', type: 'decimal', precision: 10, scale: 2 })
   priceAtAdd: number;
 
   @Column({ name: 'created_at' })
@@ -37,12 +37,11 @@ export class CartItem {
   @Column({ name: 'updated_at' })
   updatedAt: Date;
 
-  // Relations (unchanged)
   @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'cart_id' }) // ✅ Explicit join column
+  @JoinColumn({ name: 'cart_id' }) //Explicit join column
   cart: Cart;
 
   @ManyToOne(() => Product)
   @JoinColumn({ name: 'product_id' })
-  product: Product;
+  product?: Product;
 }

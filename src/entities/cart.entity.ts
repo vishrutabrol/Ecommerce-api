@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { User } from './user.entity';
 import { CartItem } from './cart-item.entity';
+import { Payment } from './payment.entity';
 
 // cart.entity.ts - FIXED
 @Entity('carts')
@@ -39,4 +40,7 @@ export class Cart {
 
   @OneToMany(() => CartItem, (item) => item.cart)
   items: CartItem[];
+
+  @OneToMany(() => Payment, (payment) => payment.cart)
+  payments: Payment[];
 }

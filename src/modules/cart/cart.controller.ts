@@ -14,6 +14,7 @@ import { CartService } from './cart.service';
 import { CartItemDto } from './cart.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { User } from '../../entities/user.entity';
+import { PaymentService } from '../payments/payment.service';
 
 interface AuthRequest extends Request {
   user?: { id: number; email: string };
@@ -22,7 +23,9 @@ interface AuthRequest extends Request {
 @Controller('cart')
 @UseGuards(JwtAuthGuard)
 export class CartController {
-  constructor(private readonly cartService: CartService) {}
+  constructor(
+    private readonly cartService: CartService,
+  ) {}
 
   @Get()
   async getCart(@Req() req): Promise<any> {
